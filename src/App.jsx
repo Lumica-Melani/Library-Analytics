@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Pages/Home";
 import Catalogue from "./Pages/Catalogue";
+import CategoryBooks from "./Pages/CategoryBooks";
 import Analytics from "./Pages/Analytics";
 import Layout from "./Components/Layout";
 
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "catalogue",
         element: <Catalogue />,
+      },
+      {
+        path: "catalogue/:genre",
+        element: <CategoryBooks />,
       },
       {
         path: "analytics",
