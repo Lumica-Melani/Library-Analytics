@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  /* Classic Editorial (Project Light Theme) */
+  --color-bg: #0c0f17;
+  --color-surface: #161b26;
+  --color-text: #eceff4;
+  --color-muted: #94a3b8;
+  --color-primary: #cbd5e1;
+  --color-accent: #c8a05a;
+}
+
+.dark {
+  --color-bg: #09090b;
+  --color-surface: #18181b;
+  --color-text: #fafafa;
+  --color-muted: #a1a1aa;
+  --color-primary: #d4d4d8;
+  --color-accent: #d9b677;
+}
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-primary);
+    font-family: var(--font-serif);
+    letter-spacing: -0.02em;
+  }
+
+  p,
+  span,
+  a {
+    color: var(--color-text);
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply inline-flex items-center
+      px-4 py-2
+      rounded-md
+      font-medium
+      text-[var(--color-muted)]
+      transition-all
+      duration-200;
+  }
+
+  .nav-link:hover {
+    @apply text-[var(--color-text)]
+           bg-[var(--color-surface)];
+  }
+
+  .nav-link-active {
+    @apply text-[var(--color-text)]
+           bg-[var(--color-surface)];
+  }
+
+  /* subtle luxury glow */
+  .nav-link-active {
+    box-shadow: 0 0 12px rgba(200, 160, 90, 0.35);
+  }
+}
