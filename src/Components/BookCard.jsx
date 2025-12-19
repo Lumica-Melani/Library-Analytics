@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+import { getMostViewedBook } from "../utils/viewTracker";
+
 export default function BookCard({ book }) {
+  useEffect(() => {
+    getMostViewedBook(book.id);
+  }, [book.id]);
+
   return (
     <div className="rounded-xl overflow-hidden bg-neutral-900 shadow-lg hover:-translate-y-1 transition">
       <img

@@ -204,7 +204,7 @@ export const books = [
     id: "nonfiction-1",
     title: "Stardust And Secrets",
     author: "Dr. A. Chandra",
-    genre: "non-fictional",
+    genre: "non-fiction",
     picks: 182,
     likes: 146,
     rating: 4.8,
