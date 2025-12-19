@@ -60,7 +60,7 @@ export const books = [
   {
     id: "fantasy-5",
     title: "City of the Celestial Sky",
-    author: "Elric Dawn",
+    author: "Mira Kael",
     genre: "fantasy",
     picks: 86,
     likes: 54,

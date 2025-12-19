@@ -4,6 +4,7 @@ import Catalogue from "./Pages/Catalogue";
 import CategoryBooks from "./Pages/CategoryBooks";
 import Analytics from "./Pages/Analytics";
 import Layout from "./Components/Layout";
+import NotFound from "./Pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "analytics",
         element: <Analytics />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
