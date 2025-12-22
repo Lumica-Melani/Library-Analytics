@@ -1,43 +1,28 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { books, categories } from "../data/data";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch, setSort } from "../store/booksSlice";
+import { fetchBooks } from "../store/booksThunks";
 import BookCard from "../Components/BookCard";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { categories } from "../data/data";
 
 export default function CategoryBooks() {
   const { genre } = useParams();
+  const dispatch = useDispatch();
+  const [, setSearchParams] = useSearchParams();
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const searchValue = searchParams.get("search") || "";
-  const sortValue = searchParams.get("sort") || "";
+  const { items, search, sort, loading } = useSelector((state) => state.books);
 
-  const [inputValue, setInputValue] = useState(searchValue);
+  const [inputValue, setInputValue] = useState(search);
 
   const categoryExists = categories.some(
     (cat) => cat.genre.toLowerCase() === genre.toLowerCase()
   );
 
-  const visibleBooks = useMemo(() => {
-    if (!categoryExists) return [];
-
-    let result = books.filter((book) => {
-      const matchesGenre = book.genre?.toLowerCase() === genre.toLowerCase();
-      const matchesSearch =
-        book.title?.toLowerCase().includes(searchValue.toLowerCase()) ||
-        book.author?.toLowerCase().includes(searchValue.toLowerCase());
-
-      return matchesGenre && matchesSearch;
-    });
-
-    if (sortValue === "az")
-      result.sort((a, b) => a.title.localeCompare(b.title));
-    if (sortValue === "rating-high") result.sort((a, b) => b.rating - a.rating);
-    if (sortValue === "rating-low") result.sort((a, b) => a.rating - b.rating);
-
-    return result;
-  }, [genre, searchValue, sortValue, categoryExists]);
-
   useEffect(() => {
     const timeout = setTimeout(() => {
+      dispatch(setSearch(inputValue));
+
       setSearchParams((prev) => {
         inputValue ? prev.set("search", inputValue) : prev.delete("search");
         return prev;
@@ -45,7 +30,13 @@ export default function CategoryBooks() {
     }, 300);
 
     return () => clearTimeout(timeout);
-  }, [inputValue, setSearchParams]);
+  }, [inputValue, dispatch, setSearchParams]);
+
+  useEffect(() => {
+    if (categoryExists) {
+      dispatch(fetchBooks({ genre, search, sort }));
+    }
+  }, [genre, search, sort, dispatch, categoryExists]);
 
   if (!categoryExists) {
     return (
@@ -63,46 +54,33 @@ export default function CategoryBooks() {
       <h1 className="text-4xl font-semibold capitalize mb-10 text-center">
         {genre} Books
       </h1>
+
       <div className="flex flex-col gap-4 mb-12 sm:flex-row sm:items-center sm:justify-between">
         <input
           type="text"
           placeholder="Search by author or book title"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          className="
-      w-full sm:max-w-md
-      px-4 py-2
-      rounded-lg
-      bg-[#0f1f21]
-      text-[#e6e9e3]
-      placeholder:text-[#8fa3a1]
-      border border-[#1e3a3c]
-      focus:outline-none
-      focus:ring-2 focus:ring-[#c6b27c]
-      transition
-    "
+          className="w-full sm:max-w-md px-4 py-2 rounded-lg bg-[#0f1f21]
+            text-[#e6e9e3] placeholder:text-[#8fa3a1]
+            border border-[#1e3a3c]
+            focus:outline-none focus:ring-2 focus:ring-[#c6b27c]"
         />
 
         <select
-          value={sortValue}
-          onChange={(e) =>
+          value={sort}
+          onChange={(e) => {
+            dispatch(setSort(e.target.value));
             setSearchParams((prev) => {
-              prev.set("sort", e.target.value);
+              e.target.value
+                ? prev.set("sort", e.target.value)
+                : prev.delete("sort");
               return prev;
-            })
-          }
-          className="
-      w-full sm:w-56
-      px-4 py-2
-      rounded-lg
-      bg-[#0f1f21]
-      text-[#e6e9e3]
-      border border-[#1e3a3c]
-      focus:outline-none
-      focus:ring-2 focus:ring-[#c6b27c]
-      transition
-      cursor-pointer
-    "
+            });
+          }}
+          className="w-full sm:w-56 px-4 py-2 rounded-lg bg-[#0f1f21]
+            text-[#e6e9e3] border border-[#1e3a3c]
+            focus:outline-none focus:ring-2 focus:ring-[#c6b27c]"
         >
           <option value="">Sort By:</option>
           <option value="az">Alphabetical (A–Z)</option>
@@ -111,11 +89,17 @@ export default function CategoryBooks() {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {visibleBooks.map((book) => (
-          <BookCard key={book.id} book={book} />
-        ))}
-      </div>
+      {loading ? (
+        <p className="text-center animate-pulse text-[#8fa3a1]">
+          Loading books…
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {items.map((book) => (
+            <BookCard key={book.id} book={book} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

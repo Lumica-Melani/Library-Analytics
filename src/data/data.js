@@ -1,19 +1,65 @@
+import FantasyCat from "../assets/FantasyCat.png";
+import SciFiCat from "../assets/Sci-fiCat.png";
+import FictionCat from "../assets/FictionalCat.png";
+import NonFictionCat from "../assets/Non-fictionalCat.png";
+import HorrorCat from "../assets/HorrorCat.png";
+
+// Fantasy books
+import FantasyOne from "../assets/FantasyOne.png";
+import FantasyTwo from "../assets/FantasyTwo.png";
+import FantasyThree from "../assets/FantasyThree.png";
+import FantasyFour from "../assets/FantasyFour.png";
+import FantasyFive from "../assets/FantasyFive.png";
+import FantasySix from "../assets/FantasySix.png";
+
+// Sci-Fi books
+import SciFiOne from "../assets/Sci-fiOne.png";
+import SciFiTwo from "../assets/Sci-fiTwo.png";
+import SciFiThree from "../assets/Sci-fiThree.png";
+import SciFiFour from "../assets/Sci-fiFour.png";
+import SciFiFive from "../assets/Sci-fiFive.png";
+import SciFiSix from "../assets/Sci-fiSix.png";
+
+// Fiction
+import FicOne from "../assets/FicOne.png";
+import FicTwo from "../assets/FicTwo.png";
+import FicThree from "../assets/FicThree.png";
+import FicFour from "../assets/FicFour.png";
+import FicFive from "../assets/FicFive.png";
+import FicSix from "../assets/FicSix.png";
+
+// Non-fiction
+import NficOne from "../assets/NficOne.png";
+import NficTwo from "../assets/NficTwo.png";
+import NficThree from "../assets/NficThree.png";
+import NficFour from "../assets/NficFour.png";
+import NficFive from "../assets/NficFive.png";
+import NficSix from "../assets/NficSix.png";
+
+// Horror
+import HorOne from "../assets/HorOne.png";
+import HorTwo from "../assets/HorTwo.png";
+import HorThree from "../assets/HorThree.png";
+import HorFour from "../assets/HorFour.png";
+import HorFive from "../assets/HorFive.png";
+import HorSix from "../assets/HorSix.png";
+
 export const categories = [
-  { id: "Fantasy", name: "Fantasy", genre: "fantasy", img: "/FantasyCat.png" },
-  { id: "Sci-fi", name: "Sci-fi", genre: "sci-fi", img: "/Sci-fiCat.png" },
+  { id: "Fantasy", name: "Fantasy", genre: "fantasy", img: FantasyCat },
+  { id: "Sci-fi", name: "Sci-fi", genre: "sci-fi", img: SciFiCat },
   {
     id: "Fiction",
     name: "Fiction",
     genre: "fiction",
-    img: "/FictionalCat.png",
+    img: FictionCat,
   },
   {
     id: "Non-Fiction",
     name: "Non-Fiction",
     genre: "non-fiction",
-    img: "/Non-fictionalCat.png",
+    img: NonFictionCat,
   },
-  { id: "Horror", name: "Horror", genre: "horror", img: "/HorrorCat.png" },
+  { id: "Horror", name: "Horror", genre: "horror", img: HorrorCat },
 ];
 
 export const books = [
@@ -25,7 +71,7 @@ export const books = [
     picks: 142,
     likes: 96,
     rating: 4.7,
-    bookUrl: "/FantasyOne.png",
+    bookUrl: FantasyOne,
   },
   {
     id: "fantasy-2",
@@ -35,7 +81,7 @@ export const books = [
     picks: 118,
     likes: 82,
     rating: 4.5,
-    bookUrl: "/FantasyTwo.png",
+    bookUrl: FantasyTwo,
   },
   {
     id: "fantasy-3",
@@ -45,7 +91,7 @@ export const books = [
     picks: 164,
     likes: 121,
     rating: 4.8,
-    bookUrl: "/FantasyThree.png",
+    bookUrl: FantasyThree,
   },
   {
     id: "fantasy-4",
@@ -55,7 +101,7 @@ export const books = [
     picks: 97,
     likes: 63,
     rating: 4.3,
-    bookUrl: "/FantasyFour.png",
+    bookUrl: FantasyFour,
   },
   {
     id: "fantasy-5",
@@ -65,7 +111,7 @@ export const books = [
     picks: 86,
     likes: 54,
     rating: 4.1,
-    bookUrl: "/FantasyFive.png",
+    bookUrl: FantasyFive,
   },
   {
     id: "fantasy-6",
@@ -75,7 +121,7 @@ export const books = [
     picks: 133,
     likes: 89,
     rating: 4.6,
-    bookUrl: "/FantasySix.png",
+    bookUrl: FantasySix,
   },
 
   {
@@ -85,8 +131,8 @@ export const books = [
     genre: "sci-Fi",
     picks: 152,
     likes: 104,
-    rating: 4.6,
-    bookUrl: "/Sci-fiOne.png",
+    rating: 4.2,
+    bookUrl: SciFiOne,
   },
   {
     id: "scifi-2",
@@ -95,8 +141,8 @@ export const books = [
     genre: "sci-Fi",
     picks: 129,
     likes: 91,
-    rating: 4.4,
-    bookUrl: "/Sci-fiTwo.png",
+    rating: 4.3,
+    bookUrl: SciFiTwo,
   },
   {
     id: "scifi-3",
@@ -105,8 +151,8 @@ export const books = [
     genre: "sci-Fi",
     picks: 175,
     likes: 139,
-    rating: 4.9,
-    bookUrl: "/Sci-fiThree.png",
+    rating: 4.1,
+    bookUrl: SciFiThree,
   },
   {
     id: "scifi-4",
@@ -116,7 +162,7 @@ export const books = [
     picks: 94,
     likes: 60,
     rating: 4.2,
-    bookUrl: "/Sci-fiFour.png",
+    bookUrl: SciFiFour,
   },
   {
     id: "scifi-5",
@@ -125,8 +171,8 @@ export const books = [
     genre: "sci-Fi",
     picks: 111,
     likes: 73,
-    rating: 4.3,
-    bookUrl: "/Sci-fiFive.png",
+    rating: 4.1,
+    bookUrl: SciFiFive,
   },
   {
     id: "scifi-6",
@@ -135,8 +181,8 @@ export const books = [
     genre: "sci-Fi",
     picks: 136,
     likes: 88,
-    rating: 4.5,
-    bookUrl: "/Sci-fiSix.png",
+    rating: 4.2,
+    bookUrl: SciFiSix,
   },
 
   {
@@ -147,7 +193,7 @@ export const books = [
     picks: 121,
     likes: 77,
     rating: 4.2,
-    bookUrl: "/FicOne.png",
+    bookUrl: FicOne,
   },
   {
     id: "fiction-2",
@@ -157,7 +203,7 @@ export const books = [
     picks: 98,
     likes: 61,
     rating: 4.0,
-    bookUrl: "/FicTwo.png",
+    bookUrl: FicTwo,
   },
   {
     id: "fiction-3",
@@ -167,7 +213,7 @@ export const books = [
     picks: 144,
     likes: 109,
     rating: 4.6,
-    bookUrl: "/FicThree.png",
+    bookUrl: FicThree,
   },
   {
     id: "fiction-4",
@@ -177,7 +223,7 @@ export const books = [
     picks: 87,
     likes: 49,
     rating: 3.9,
-    bookUrl: "/FicFour.png",
+    bookUrl: FicFour,
   },
   {
     id: "fiction-5",
@@ -187,7 +233,7 @@ export const books = [
     picks: 113,
     likes: 72,
     rating: 4.1,
-    bookUrl: "/FicFive.png",
+    bookUrl: FicFive,
   },
   {
     id: "fiction-6",
@@ -197,7 +243,7 @@ export const books = [
     picks: 159,
     likes: 118,
     rating: 4.7,
-    bookUrl: "/FicSix.png",
+    bookUrl: FicSix,
   },
 
   {
@@ -207,8 +253,8 @@ export const books = [
     genre: "non-fiction",
     picks: 182,
     likes: 146,
-    rating: 4.8,
-    bookUrl: "/NficOne.png",
+    rating: 4.2,
+    bookUrl: NficOne,
   },
   {
     id: "nonfiction-2",
@@ -217,8 +263,8 @@ export const books = [
     genre: "non-fiction",
     picks: 167,
     likes: 133,
-    rating: 4.7,
-    bookUrl: "/NficTwo.png",
+    rating: 4.1,
+    bookUrl: NficTwo,
   },
   {
     id: "nonfiction-3",
@@ -227,8 +273,8 @@ export const books = [
     genre: "non-fiction",
     picks: 139,
     likes: 97,
-    rating: 4.5,
-    bookUrl: "/NficThree.png",
+    rating: 3.0,
+    bookUrl: NficThree,
   },
   {
     id: "nonfiction-4",
@@ -238,7 +284,7 @@ export const books = [
     picks: 91,
     likes: 58,
     rating: 4.0,
-    bookUrl: "/NficFour.png",
+    bookUrl: NficFour,
   },
   {
     id: "nonfiction-5",
@@ -247,8 +293,8 @@ export const books = [
     genre: "non-fiction",
     picks: 156,
     likes: 121,
-    rating: 4.6,
-    bookUrl: "/NficFive.png",
+    rating: 4.2,
+    bookUrl: NficFive,
   },
   {
     id: "nonfiction-6",
@@ -258,7 +304,7 @@ export const books = [
     picks: 127,
     likes: 84,
     rating: 4.3,
-    bookUrl: "/NficSix.png",
+    bookUrl: NficSix,
   },
 
   {
@@ -269,7 +315,7 @@ export const books = [
     picks: 149,
     likes: 102,
     rating: 4.6,
-    bookUrl: "/HorOne.png",
+    bookUrl: HorOne,
   },
   {
     id: "horror-2",
@@ -279,7 +325,7 @@ export const books = [
     picks: 117,
     likes: 81,
     rating: 4.4,
-    bookUrl: "/HorTwo.png",
+    bookUrl: HorTwo,
   },
   {
     id: "horror-3",
@@ -289,7 +335,7 @@ export const books = [
     picks: 163,
     likes: 131,
     rating: 4.8,
-    bookUrl: "/HorThree.png",
+    bookUrl: HorThree,
   },
   {
     id: "horror-4",
@@ -299,7 +345,7 @@ export const books = [
     picks: 92,
     likes: 59,
     rating: 4.1,
-    bookUrl: "/HorFour.png",
+    bookUrl: HorFour,
   },
   {
     id: "horror-5",
@@ -309,7 +355,7 @@ export const books = [
     picks: 106,
     likes: 74,
     rating: 4.3,
-    bookUrl: "/HorFive.png",
+    bookUrl: HorFive,
   },
   {
     id: "horror-6",
@@ -319,6 +365,6 @@ export const books = [
     picks: 138,
     likes: 99,
     rating: 4.5,
-    bookUrl: "/HorSix.png",
+    bookUrl: HorSix,
   },
 ];
