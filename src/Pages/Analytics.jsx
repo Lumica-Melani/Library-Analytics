@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getMostViewedBook } from "../utils/viewTracker";
 import { books } from "../data/data";
 import {
@@ -11,7 +11,16 @@ import {
 } from "recharts";
 
 function Analytics() {
-  const mostViewedBook = getMostViewedBook();
+  const [mostViewedBook, setMostViewedBook] = useState(null);
+
+  useEffect(() => {
+    const updateMostViewed = () => setMostViewedBook(getMostViewedBook());
+
+    updateMostViewed();
+
+    window.addEventListener("storage", updateMostViewed);
+    return () => window.removeEventListener("storage", updateMostViewed);
+  }, []);
 
   const topRatedBooks = useMemo(() => {
     return [...books].sort((a, b) => b.rating - a.rating).slice(0, 3);
@@ -19,23 +28,16 @@ function Analytics() {
 
   const avgRatingsPerGenre = useMemo(() => {
     const genreMap = {};
-
     books.forEach((book) => {
-      if (!genreMap[book.genre]) {
-        genreMap[book.genre] = {
-          totalRating: 0,
-          count: 0,
-        };
-      }
-
+      if (!genreMap[book.genre])
+        genreMap[book.genre] = { totalRating: 0, count: 0 };
       genreMap[book.genre].totalRating += book.rating;
       genreMap[book.genre].count += 1;
     });
-
     return Object.entries(genreMap)
       .map(([genre, data]) => ({
         genre,
-        avgRating: Number((data.totalRating / data.count).toFixed(2)),
+        avgRating: +(data.totalRating / data.count).toFixed(2),
       }))
       .sort((a, b) => b.avgRating - a.avgRating);
   }, []);
@@ -77,7 +79,6 @@ function Analytics() {
         <h2 className="text-2xl font-semibold mb-6 text-center">
           Top Rated Books
         </h2>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {topRatedBooks.map((book) => (
             <div
@@ -89,7 +90,6 @@ function Analytics() {
                 alt={book.title}
                 className="h-64 w-full object-contain mb-4"
               />
-
               <h3 className="text-lg font-semibold">{book.title}</h3>
               <p className="text-[#8fa3a1]">{book.author}</p>
               <p className="mt-2 text-sm">⭐ {book.rating}</p>
@@ -102,13 +102,7 @@ function Analytics() {
         <h1 className="text-3xl font-semibold mb-8 text-center">
           Average Rating per Genre
         </h1>
-
-        <div
-          className="max-w-4xl mx-auto h-96
-                      bg-[#0f1f21]
-                      border border-[#1e3a3c]
-                      rounded-2xl p-6"
-        >
+        <div className="max-w-4xl mx-auto h-96 bg-[#0f1f21] border border-[#1e3a3c] rounded-2xl p-6">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={avgRatingsPerGenre}>
               <XAxis dataKey="genre" tick={{ fill: "#e6e9e3" }} />
