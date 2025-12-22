@@ -11,7 +11,7 @@ import {
 } from "recharts";
 
 function Analytics() {
-  const mostViewedBook = useMemo(() => getMostViewedBook(), []);
+  const mostViewedBook = getMostViewedBook();
 
   const topRatedBooks = useMemo(() => {
     return [...books].sort((a, b) => b.rating - a.rating).slice(0, 3);
@@ -47,7 +47,7 @@ function Analytics() {
           Library Analytics
         </h1>
 
-        {mostViewedBook && (
+        {mostViewedBook ? (
           <div className="max-w-md mx-auto rounded-2xl bg-[#0f1f21] p-6 border border-[#1e3a3c]">
             <h2 className="text-xl font-semibold mb-4 text-center">
               Most Viewed Book
@@ -66,6 +66,10 @@ function Analytics() {
               {mostViewedBook.author}
             </p>
           </div>
+        ) : (
+          <p className="text-center text-[#8fa3a1]">
+            No book views recorded yet
+          </p>
         )}
       </section>
 
