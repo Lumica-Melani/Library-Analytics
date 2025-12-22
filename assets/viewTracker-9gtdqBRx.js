@@ -1,0 +1,1 @@
+import{b as i}from"./index-D8nwOLRk.js";function a(){const e=localStorage.getItem("dlibrary_views");if(!e)return null;const r=JSON.parse(e),o=Object.entries(r).sort((t,s)=>s[1]-t[1]);if(!o.length)return null;const[n]=o[0];return i.find(t=>t.id===n)||null}export{a as g};
