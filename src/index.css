@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+.clerk-card {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+  border-radius: 12px !important;
+  padding: 1rem;
+}
+
+.clerk-button-primary {
+  background-color: var(--color-accent) !important;
+  color: black !important;
+  border-radius: 8px !important;
+}
+
 :root {
   /* Classic Editorial (Project Light Theme) */
   --color-bg: #0c0f17;

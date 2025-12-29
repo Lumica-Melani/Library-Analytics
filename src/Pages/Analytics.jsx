@@ -10,6 +10,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
+
 function Analytics() {
   const [mostViewedBook, setMostViewedBook] = useState(null);
 
@@ -44,82 +46,94 @@ function Analytics() {
 
   return (
     <>
-      <section className="px-6 py-10">
-        <h1 className="text-4xl font-semibold mb-10 text-center">
-          Library Analytics
-        </h1>
+      <SignedIn>
+        <>
+          <section className="px-6 py-10">
+            <h1 className="text-4xl font-semibold mb-10 text-center">
+              Library Analytics
+            </h1>
 
-        {mostViewedBook ? (
-          <div className="max-w-md mx-auto rounded-2xl bg-[#0f1f21] p-6 border border-[#1e3a3c]">
-            <h2 className="text-xl font-semibold mb-4 text-center">
-              Most Viewed Book
+            {mostViewedBook ? (
+              <div className="max-w-md mx-auto rounded-2xl bg-[#0f1f21] p-6 border border-[#1e3a3c]">
+                <h2 className="text-xl font-semibold mb-4 text-center">
+                  Most Viewed Book
+                </h2>
+
+                <img
+                  src={mostViewedBook.bookUrl}
+                  alt={mostViewedBook.title}
+                  className="h-64 w-full object-contain mb-4"
+                />
+
+                <h3 className="text-lg font-semibold text-center">
+                  {mostViewedBook.title}
+                </h3>
+                <p className="text-[#8fa3a1] text-center">
+                  {mostViewedBook.author}
+                </p>
+              </div>
+            ) : (
+              <p className="text-center text-[#8fa3a1]">
+                No book views recorded yet
+              </p>
+            )}
+          </section>
+
+          <section className="px-6 py-10">
+            <h2 className="text-2xl font-semibold mb-6 text-center">
+              Top Rated Books
             </h2>
-
-            <img
-              src={mostViewedBook.bookUrl}
-              alt={mostViewedBook.title}
-              className="h-64 w-full object-contain mb-4"
-            />
-
-            <h3 className="text-lg font-semibold text-center">
-              {mostViewedBook.title}
-            </h3>
-            <p className="text-[#8fa3a1] text-center">
-              {mostViewedBook.author}
-            </p>
-          </div>
-        ) : (
-          <p className="text-center text-[#8fa3a1]">
-            No book views recorded yet
-          </p>
-        )}
-      </section>
-
-      <section className="px-6 py-10">
-        <h2 className="text-2xl font-semibold mb-6 text-center">
-          Top Rated Books
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {topRatedBooks.map((book) => (
-            <div
-              key={book.id}
-              className="rounded-2xl bg-[#0f1f21] p-4 border border-[#1e3a3c]"
-            >
-              <img
-                src={book.bookUrl}
-                alt={book.title}
-                className="h-64 w-full object-contain mb-4"
-              />
-              <h3 className="text-lg font-semibold">{book.title}</h3>
-              <p className="text-[#8fa3a1]">{book.author}</p>
-              <p className="mt-2 text-sm">⭐ {book.rating}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {topRatedBooks.map((book) => (
+                <div
+                  key={book.id}
+                  className="rounded-2xl bg-[#0f1f21] p-4 border border-[#1e3a3c]"
+                >
+                  <img
+                    src={book.bookUrl}
+                    alt={book.title}
+                    className="h-64 w-full object-contain mb-4"
+                  />
+                  <h3 className="text-lg font-semibold">{book.title}</h3>
+                  <p className="text-[#8fa3a1]">{book.author}</p>
+                  <p className="mt-2 text-sm">⭐ {book.rating}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
 
-      <section className="px-6 py-10">
-        <h1 className="text-3xl font-semibold mb-8 text-center">
-          Average Rating per Genre
-        </h1>
-        <div className="max-w-4xl mx-auto h-96 bg-[#0f1f21] border border-[#1e3a3c] rounded-2xl p-6">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={avgRatingsPerGenre}>
-              <XAxis dataKey="genre" tick={{ fill: "#e6e9e3" }} />
-              <YAxis domain={[0, 5]} tick={{ fill: "#e6e9e3" }} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#0f1f21",
-                  border: "1px solid #1e3a3c",
-                  borderRadius: "8px",
-                  color: "#e6e9e3",
-                }}
-              />
-              <Bar dataKey="avgRating" fill="#c6b27c" radius={[8, 8, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </section>
+          <section className="px-6 py-10">
+            <h1 className="text-3xl font-semibold mb-8 text-center">
+              Average Rating per Genre
+            </h1>
+            <div className="max-w-4xl mx-auto h-96 bg-[#0f1f21] border border-[#1e3a3c] rounded-2xl p-6">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={avgRatingsPerGenre}>
+                  <XAxis dataKey="genre" tick={{ fill: "#e6e9e3" }} />
+                  <YAxis domain={[0, 5]} tick={{ fill: "#e6e9e3" }} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#0f1f21",
+                      border: "1px solid #1e3a3c",
+                      borderRadius: "8px",
+                      color: "#e6e9e3",
+                    }}
+                  />
+                  <Bar
+                    dataKey="avgRating"
+                    fill="#c6b27c"
+                    radius={[8, 8, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </section>
+        </>
+      </SignedIn>
+
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
     </>
   );
 }
