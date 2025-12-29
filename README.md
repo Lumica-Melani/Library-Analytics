@@ -80,7 +80,7 @@ Images served from project assets for reliable builds
 
 ```bash
 git clone https://github.com/Lumica-Melani/Library-Analytics.git
-cd Layout-generator
+cd Library-Analytics
 ```
 
 ### 2. Install dependencies
